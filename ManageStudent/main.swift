@@ -4,12 +4,12 @@ import Foundation
 
 struct Student {
     var name:String
-    var id:Int
+    var id:String
     var mathScore: Float
     var physicsScore: Float
     var chemistryScore: Float
     
-    init(name: String, id: Int, mathScore: Float, physicsScore: Float, chemistryScore: Float) {
+    init(name: String, id: String, mathScore: Float, physicsScore: Float, chemistryScore: Float) {
         self.name = name
         self.id = id
         self.mathScore = mathScore
@@ -22,16 +22,14 @@ struct Student {
     }
 }
 
-var data = [Int:Student]()
+var data = [String:Student]()
 
 func addStudent(){
     print("Nhap ten sinh vien: ")
-    let name = readLine() ?? ""
-    print("Nhập ID (không bắt đầu bằng số 0): ")
-    guard let input = readLine(), let id = Int(input) else {
-        print("Sai định dạng. Vui lòng thực hiện lại")
-        return
-    }
+    let name = readLine() ?? "Illegal name add"
+    print("Nhập ID: ")
+    
+    let id = readLine() ?? "Illegal id"
     if let check = data[id] {
         print("ID đã tồn tại. Vui lòng thêm mới.")
         return
@@ -72,11 +70,8 @@ func showByAverageScore(){
 
 func updateScore(){
     print("Nhập ID sinh viên: ")
-    guard let input = readLine(), let id = Int(input) else {
-        print("Sai định dạng. Vui lòng thực hiện lại")
-        return
-    }
-    guard var student = data[id] else {
+    let id = readLine() ?? "Illegal name update"
+    guard let student = data[id] else{
         print("ID chưa tồn tại. Vui lòng thêm mới.")
         return
     }
